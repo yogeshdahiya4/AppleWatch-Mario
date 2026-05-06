@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0466710686F3FA7F2A16475C /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F7F789FDA39C609A03386E /* InputController.swift */; };
+		16FFD1E09BDD54EF68BD9B27 /* World1_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C3B52994A9960E21E2107 /* World1_4.swift */; };
+		27BDD5267D5B8DC5EBBF94E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788E4EF3D405C988AF04E562 /* Assets.xcassets */; };
+		31B8CFEABE6314C0D03DB564 /* World1_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0489A01EBF290B277BFCD /* World1_2.swift */; };
+		34EAD457CB0B415AB840DA89 /* World1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE7ADB8560BC7637BEB263 /* World1_3.swift */; };
+		43CD3E4DA6467E2A002F4B3A /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62F7FA2438F7F434C2B4D72 /* Physics.swift */; };
+		4673030A785B531A9D82C808 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379775CDD963037DF0F83591 /* GameScene.swift */; };
+		4821DAB34CB1324D4B59E103 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9713B9D95C6B8D7337522901 /* Haptics.swift */; };
+		4AF7DEED90B8B175E7219462 /* JoystickOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC55C6E961AEA1C1EDA8C3 /* JoystickOverlay.swift */; };
+		5BA3A09519F54A697B352C8D /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C01826EC43499229A9245 /* Enemy.swift */; };
+		5E732D714FE3C2554E9C391A /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86C70C3663D3E493920C3A /* LevelData.swift */; };
+		67C612AFCA6202F726CC16AA /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A79F04E35CAB9A92AA98123 /* DeviceIdentity.swift */; };
+		71AF5EEE38E662270E09520B /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98F30EFBD85D47F611553EE /* HUDView.swift */; };
+		788C391AB99FA07CFA4E1AD6 /* LevelSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB872C7BF14FC140157E668 /* LevelSelectView.swift */; };
+		81F0783FE9AD9DF2AB8D07FD /* GameSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A30573259BADE58A68A9AA3 /* GameSave.swift */; };
+		882349363A7E6907C6BD9642 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4748C29A402E5E9C978AB1B3 /* LeaderboardView.swift */; };
+		8A767DDABD9556329685E780 /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8382439ECF85546EA26EE46 /* MainMenuView.swift */; };
+		8B41A2D34B3C058EBEC7F27D /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19724337B27E79CB0196371 /* Sound.swift */; };
+		8B5455C0979382494102E815 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43EC9A309DB2B528F01414 /* SettingsView.swift */; };
+		8B99C203E81C85F18243C8AF /* HMACSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5B6FF3A85BED1AB9533A9 /* HMACSigner.swift */; };
+		95E2D885569246DE657D7D08 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF86FF30D59940BA5BE325D /* RootView.swift */; };
+		9E3C7584DB7D82A000140711 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47519AFF97176D2036B9ECFB /* Camera.swift */; };
+		AE9852883B9F9C2147DDB269 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118686DB3F564874F51CECA9 /* GameOverView.swift */; };
+		C6F9AC68351C4C0381CE4C61 /* GameContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E322B57E09F5F9224A64A45 /* GameContainerView.swift */; };
+		C784D048FA08D4F63B571348 /* World1_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3458567BF37FD455DBD5DCEB /* World1_1.swift */; };
+		CF6422204DBCCC1A489288D3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375423B8CBF8364B5A441C17 /* Player.swift */; };
+		DBF9E3778F9F4D78B9775935 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B34FADA683190C5C343AD0 /* APIClient.swift */; };
+		E6C1E86D752B542209535A14 /* PixelHopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05596BF8BF56931B70DEE512 /* PixelHopApp.swift */; };
+		F74A160BFE344DA8CA9583EA /* NicknameOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C7C8788AD16D5A6F2930E3 /* NicknameOnboardingView.swift */; };
+		FAF2D5EFC6A8DA1C71EEE28C /* ScoreSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5F2BF2D0FFD9B8F3E1C79 /* ScoreSubmitter.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05596BF8BF56931B70DEE512 /* PixelHopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelHopApp.swift; sourceTree = "<group>"; };
+		118686DB3F564874F51CECA9 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		28BC55C6E961AEA1C1EDA8C3 /* JoystickOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickOverlay.swift; sourceTree = "<group>"; };
+		3458567BF37FD455DBD5DCEB /* World1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_1.swift; sourceTree = "<group>"; };
+		375423B8CBF8364B5A441C17 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		379775CDD963037DF0F83591 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		4748C29A402E5E9C978AB1B3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
+		47519AFF97176D2036B9ECFB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		4DE5B6FF3A85BED1AB9533A9 /* HMACSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACSigner.swift; sourceTree = "<group>"; };
+		4F8C01826EC43499229A9245 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		51B34FADA683190C5C343AD0 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		5CB872C7BF14FC140157E668 /* LevelSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectView.swift; sourceTree = "<group>"; };
+		5DF7AA820E2900B0B7EAD825 /* PixelHop Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PixelHop Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E322B57E09F5F9224A64A45 /* GameContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContainerView.swift; sourceTree = "<group>"; };
+		62C7C8788AD16D5A6F2930E3 /* NicknameOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameOnboardingView.swift; sourceTree = "<group>"; };
+		788E4EF3D405C988AF04E562 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7A30573259BADE58A68A9AA3 /* GameSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSave.swift; sourceTree = "<group>"; };
+		7A79F04E35CAB9A92AA98123 /* DeviceIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIdentity.swift; sourceTree = "<group>"; };
+		7D5C3B52994A9960E21E2107 /* World1_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_4.swift; sourceTree = "<group>"; };
+		9713B9D95C6B8D7337522901 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		A19724337B27E79CB0196371 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		A3F7F789FDA39C609A03386E /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
+		BF86C70C3663D3E493920C3A /* LevelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelData.swift; sourceTree = "<group>"; };
+		D0A0489A01EBF290B277BFCD /* World1_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_2.swift; sourceTree = "<group>"; };
+		D2FE7ADB8560BC7637BEB263 /* World1_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_3.swift; sourceTree = "<group>"; };
+		D8382439ECF85546EA26EE46 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
+		DEF86FF30D59940BA5BE325D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		E62F7FA2438F7F434C2B4D72 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
+		EE43EC9A309DB2B528F01414 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F98F30EFBD85D47F611553EE /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
+		FBE5F2BF2D0FFD9B8F3E1C79 /* ScoreSubmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreSubmitter.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2588C04480D248A6C705FAC7 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				47519AFF97176D2036B9ECFB /* Camera.swift */,
+				4F8C01826EC43499229A9245 /* Enemy.swift */,
+				379775CDD963037DF0F83591 /* GameScene.swift */,
+				E62F7FA2438F7F434C2B4D72 /* Physics.swift */,
+				375423B8CBF8364B5A441C17 /* Player.swift */,
+				A9255A8EAE8F150D417FC27C /* Levels */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		2988FD2A85F62FB346E7C955 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		380F90D9C36549E9C8609D44 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				788E4EF3D405C988AF04E562 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4715E995CD7E92240FEF100F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				05596BF8BF56931B70DEE512 /* PixelHopApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		48AAE46FC5B719A1D220AB47 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				51B34FADA683190C5C343AD0 /* APIClient.swift */,
+				4DE5B6FF3A85BED1AB9533A9 /* HMACSigner.swift */,
+				FBE5F2BF2D0FFD9B8F3E1C79 /* ScoreSubmitter.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		5102FB2461D03E0F49C12ECC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5E322B57E09F5F9224A64A45 /* GameContainerView.swift */,
+				118686DB3F564874F51CECA9 /* GameOverView.swift */,
+				F98F30EFBD85D47F611553EE /* HUDView.swift */,
+				28BC55C6E961AEA1C1EDA8C3 /* JoystickOverlay.swift */,
+				4748C29A402E5E9C978AB1B3 /* LeaderboardView.swift */,
+				5CB872C7BF14FC140157E668 /* LevelSelectView.swift */,
+				D8382439ECF85546EA26EE46 /* MainMenuView.swift */,
+				62C7C8788AD16D5A6F2930E3 /* NicknameOnboardingView.swift */,
+				DEF86FF30D59940BA5BE325D /* RootView.swift */,
+				EE43EC9A309DB2B528F01414 /* SettingsView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		84189143CBD452E68EACC187 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				A3F7F789FDA39C609A03386E /* InputController.swift */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		87D7F09FFCBA32BF8C68434E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				7A79F04E35CAB9A92AA98123 /* DeviceIdentity.swift */,
+				7A30573259BADE58A68A9AA3 /* GameSave.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		9DD31A730199B7BBA5FF7B6E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5DF7AA820E2900B0B7EAD825 /* PixelHop Watch App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A48B9476BD9098EC1D2182B6 = {
+			isa = PBXGroup;
+			children = (
+				A924F46B66FF16D3C5849E95 /* PixelHop */,
+				9DD31A730199B7BBA5FF7B6E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A924F46B66FF16D3C5849E95 /* PixelHop */ = {
+			isa = PBXGroup;
+			children = (
+				4715E995CD7E92240FEF100F /* App */,
+				B9F9E3AC351E122B641BCA17 /* Audio */,
+				2588C04480D248A6C705FAC7 /* Game */,
+				84189143CBD452E68EACC187 /* Input */,
+				48AAE46FC5B719A1D220AB47 /* Networking */,
+				87D7F09FFCBA32BF8C68434E /* Persistence */,
+				380F90D9C36549E9C8609D44 /* Resources */,
+				2988FD2A85F62FB346E7C955 /* Tests */,
+				5102FB2461D03E0F49C12ECC /* UI */,
+			);
+			path = PixelHop;
+			sourceTree = "<group>";
+		};
+		A9255A8EAE8F150D417FC27C /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				BF86C70C3663D3E493920C3A /* LevelData.swift */,
+				3458567BF37FD455DBD5DCEB /* World1_1.swift */,
+				D0A0489A01EBF290B277BFCD /* World1_2.swift */,
+				D2FE7ADB8560BC7637BEB263 /* World1_3.swift */,
+				7D5C3B52994A9960E21E2107 /* World1_4.swift */,
+			);
+			path = Levels;
+			sourceTree = "<group>";
+		};
+		B9F9E3AC351E122B641BCA17 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				9713B9D95C6B8D7337522901 /* Haptics.swift */,
+				A19724337B27E79CB0196371 /* Sound.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3342694922CFAEA24134FED5 /* PixelHop Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C52295B5CBFAE5348A893A7 /* Build configuration list for PBXNativeTarget "PixelHop Watch App" */;
+			buildPhases = (
+				9CA4A90572CCEBF1E0632BFA /* Sources */,
+				C762051ABFB4D1AE109D3147 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PixelHop Watch App";
+			packageProductDependencies = (
+			);
+			productName = "PixelHop Watch App";
+			productReference = 5DF7AA820E2900B0B7EAD825 /* PixelHop Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0F9C5F6F9B1B7DDEDC5E8FA4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3342694922CFAEA24134FED5 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 814F5FFE9C6ED7627B304108 /* Build configuration list for PBXProject "PixelHop" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A48B9476BD9098EC1D2182B6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9DD31A730199B7BBA5FF7B6E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3342694922CFAEA24134FED5 /* PixelHop Watch App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C762051ABFB4D1AE109D3147 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27BDD5267D5B8DC5EBBF94E5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9CA4A90572CCEBF1E0632BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBF9E3778F9F4D78B9775935 /* APIClient.swift in Sources */,
+				9E3C7584DB7D82A000140711 /* Camera.swift in Sources */,
+				67C612AFCA6202F726CC16AA /* DeviceIdentity.swift in Sources */,
+				5BA3A09519F54A697B352C8D /* Enemy.swift in Sources */,
+				C6F9AC68351C4C0381CE4C61 /* GameContainerView.swift in Sources */,
+				AE9852883B9F9C2147DDB269 /* GameOverView.swift in Sources */,
+				81F0783FE9AD9DF2AB8D07FD /* GameSave.swift in Sources */,
+				4673030A785B531A9D82C808 /* GameScene.swift in Sources */,
+				8B99C203E81C85F18243C8AF /* HMACSigner.swift in Sources */,
+				71AF5EEE38E662270E09520B /* HUDView.swift in Sources */,
+				4821DAB34CB1324D4B59E103 /* Haptics.swift in Sources */,
+				0466710686F3FA7F2A16475C /* InputController.swift in Sources */,
+				4AF7DEED90B8B175E7219462 /* JoystickOverlay.swift in Sources */,
+				882349363A7E6907C6BD9642 /* LeaderboardView.swift in Sources */,
+				5E732D714FE3C2554E9C391A /* LevelData.swift in Sources */,
+				788C391AB99FA07CFA4E1AD6 /* LevelSelectView.swift in Sources */,
+				8A767DDABD9556329685E780 /* MainMenuView.swift in Sources */,
+				F74A160BFE344DA8CA9583EA /* NicknameOnboardingView.swift in Sources */,
+				43CD3E4DA6467E2A002F4B3A /* Physics.swift in Sources */,
+				E6C1E86D752B542209535A14 /* PixelHopApp.swift in Sources */,
+				CF6422204DBCCC1A489288D3 /* Player.swift in Sources */,
+				95E2D885569246DE657D7D08 /* RootView.swift in Sources */,
+				FAF2D5EFC6A8DA1C71EEE28C /* ScoreSubmitter.swift in Sources */,
+				8B5455C0979382494102E815 /* SettingsView.swift in Sources */,
+				8B41A2D34B3C058EBEC7F27D /* Sound.swift in Sources */,
+				C784D048FA08D4F63B571348 /* World1_1.swift in Sources */,
+				31B8CFEABE6314C0D03DB564 /* World1_2.swift in Sources */,
+				34EAD457CB0B415AB840DA89 /* World1_3.swift in Sources */,
+				16FFD1E09BDD54EF68BD9B27 /* World1_4.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0069EBF712BA295477A33F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_KEY_CFBundleDisplayName = PixelHop;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 PixelHop. Code MIT, art CC0.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKBackgroundModes = "";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yogeshdahiya.pixelhop.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		29D75958AFD7F50629D94693 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_KEY_CFBundleDisplayName = PixelHop;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 PixelHop. Code MIT, art CC0.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
+				INFOPLIST_KEY_WKApplication = YES;
+				INFOPLIST_KEY_WKBackgroundModes = "";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yogeshdahiya.pixelhop.watchkitapp;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+		54A7E73111EED058EDBAE19C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.10;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		6AC53ADC10A77D4CA5B222F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.10;
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C52295B5CBFAE5348A893A7 /* Build configuration list for PBXNativeTarget "PixelHop Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0069EBF712BA295477A33F14 /* Debug */,
+				29D75958AFD7F50629D94693 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		814F5FFE9C6ED7627B304108 /* Build configuration list for PBXProject "PixelHop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54A7E73111EED058EDBAE19C /* Debug */,
+				6AC53ADC10A77D4CA5B222F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0F9C5F6F9B1B7DDEDC5E8FA4 /* Project object */;
+}

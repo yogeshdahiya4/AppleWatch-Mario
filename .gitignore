@@ -79,6 +79,7 @@ out/
 *.key
 .coolify-token
 .coolify-uuids.json
+.coolify-secrets.json
 
 # Drizzle
 drizzle/.snapshot.json

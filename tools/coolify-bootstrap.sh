@@ -15,7 +15,7 @@ PROJECT_NAME="applewatch-mario"
 DB_NAME="pixelhop-db"
 APP_NAME="pixelhop-api"
 DOMAIN="https://applewatch-mario-api.72.62.0.34.sslip.io"
-GITHUB_APP_ID=2
+GITHUB_APP_UUID="lggog88owc0kgo088kck4s4c"  # "unizzy-coolify-github-app", authorized for yogeshdahiya4/* repos
 REPO="yogeshdahiya4/AppleWatch-Mario"
 BRANCH="main"
 BASE_DIR="/services/api"
@@ -117,11 +117,11 @@ if [[ -z "$APP_UUID" ]]; then
       --arg branch "$BRANCH" \
       --arg base "$BASE_DIR" \
       --arg domain "$DOMAIN" \
-      --argjson gh_app_id $GITHUB_APP_ID \
+      --arg gh_app_uuid "$GITHUB_APP_UUID" \
       '{name: $name, server_uuid: $server, project_uuid: $project, environment_uuid: $env,
-        github_app_uuid: $gh_app_id, git_repository: $repo, git_branch: $branch,
+        github_app_uuid: $gh_app_uuid, git_repository: $repo, git_branch: $branch,
         build_pack: "dockerfile", base_directory: $base,
-        dockerfile_location: "/services/api/Dockerfile",
+        dockerfile_location: "/Dockerfile",
         ports_exposes: "3000", domains: $domain,
         publish_directory: "", install_command: "", build_command: "", start_command: ""}')")
   APP_UUID=$(echo "$APP_RESP" | jq -r '.uuid')

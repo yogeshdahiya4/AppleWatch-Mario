@@ -15,13 +15,13 @@ green() { printf "\033[32m✓\033[0m %s\n" "$*"; }
 red()   { printf "\033[31m✗\033[0m %s\n" "$*" >&2; exit 1; }
 
 # 1. health
-H=$(curl -fsS "$API/v1/health")
+H=$(curl -fsSk "$API/v1/health")
 echo "$H" | jq . > /dev/null || red "health: not json"
 [[ $(echo "$H" | jq -r .ok) == "true" ]] || red "health: ok != true"
 green "health"
 
 # 2. register device
-REG=$(curl -fsS -X POST "$API/v1/devices" \
+REG=$(curl -fsSk -X POST "$API/v1/devices" \
   -H "Content-Type: application/json" \
   -d "$(jq -nc --arg id "$DEVICE_ID" --arg n "$NICK" '{device_id:$id, nickname:$n}')")
 SECRET=$(echo "$REG" | jq -r .secret)
@@ -29,7 +29,7 @@ SECRET=$(echo "$REG" | jq -r .secret)
 green "register device $DEVICE_ID nickname=$NICK"
 
 # 3. nickname uniqueness — registering again must fail
-HTTP=$(curl -s -o /tmp/dup.json -w "%{http_code}" -X POST "$API/v1/devices" \
+HTTP=$(curl -sk -o /tmp/dup.json -w "%{http_code}" -X POST "$API/v1/devices" \
   -H "Content-Type: application/json" \
   -d "$(jq -nc --arg id "$DEVICE_ID" --arg n "$NICK" '{device_id:$id, nickname:$n}')")
 [[ "$HTTP" == "409" ]] || red "register-duplicate: expected 409 got $HTTP"
@@ -46,7 +46,7 @@ sign_and_post() {
   printf -v sig_input '%s\n%s\n%s\n%s\n%s' "$method" "$path" "$ts" "$nonce" "$body"
   sig=$(printf '%s' "$sig_input" | openssl dgst -sha256 -hmac "$SECRET" -hex | awk '{print $NF}')
   if [[ -n "$override_sig" ]]; then sig="$override_sig"; fi
-  curl -s -o /tmp/post.json -w "%{http_code}" -X "$method" "$API$path" \
+  curl -sk -o /tmp/post.json -w "%{http_code}" -X "$method" "$API$path" \
     -H "Content-Type: application/json" \
     -H "X-Device-Id: $DEVICE_ID" \
     -H "X-Timestamp: $ts" \
@@ -71,11 +71,11 @@ TS=$(date +%s)
 NONCE=$(openssl rand -hex 16)
 SIG_INPUT=$(printf '%s\n%s\n%s\n%s\n%s' "POST" "/v1/scores" "$TS" "$NONCE" "$BODY")
 SIG=$(printf '%s' "$SIG_INPUT" | openssl dgst -sha256 -hmac "$SECRET" -hex | awk '{print $NF}')
-H1=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$API/v1/scores" \
+H1=$(curl -sk -o /dev/null -w "%{http_code}" -X POST "$API/v1/scores" \
   -H "Content-Type: application/json" \
   -H "X-Device-Id: $DEVICE_ID" -H "X-Timestamp: $TS" -H "X-Nonce: $NONCE" -H "X-Sig: $SIG" \
   --data-binary "$BODY")
-H2=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$API/v1/scores" \
+H2=$(curl -sk -o /dev/null -w "%{http_code}" -X POST "$API/v1/scores" \
   -H "Content-Type: application/json" \
   -H "X-Device-Id: $DEVICE_ID" -H "X-Timestamp: $TS" -H "X-Nonce: $NONCE" -H "X-Sig: $SIG" \
   --data-binary "$BODY")
@@ -83,7 +83,7 @@ H2=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$API/v1/scores" \
 green "nonce replay rejected"
 
 # 7. leaderboard read
-LB=$(curl -fsS "$API/v1/leaderboard/1-1")
+LB=$(curl -fsSk "$API/v1/leaderboard/1-1")
 COUNT=$(echo "$LB" | jq '.top | length')
 [[ "$COUNT" -ge 1 ]] || red "leaderboard: empty"
 green "leaderboard 1-1 has $COUNT entries; top score=$(echo "$LB" | jq '.top[0].score')"
