@@ -9,15 +9,19 @@
 /* Begin PBXBuildFile section */
 		0466710686F3FA7F2A16475C /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F7F789FDA39C609A03386E /* InputController.swift */; };
 		16FFD1E09BDD54EF68BD9B27 /* World1_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C3B52994A9960E21E2107 /* World1_4.swift */; };
+		22A11AD4B77950992619E8B3 /* tilemap_packed.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3ECB9016FDADF83F97A138 /* tilemap_packed.png */; };
+		2709608B0AF2B37C1C17BDB9 /* tilemap-backgrounds_packed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C34274012459308A238AE07 /* tilemap-backgrounds_packed.png */; };
 		27BDD5267D5B8DC5EBBF94E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 788E4EF3D405C988AF04E562 /* Assets.xcassets */; };
 		31B8CFEABE6314C0D03DB564 /* World1_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0489A01EBF290B277BFCD /* World1_2.swift */; };
 		34EAD457CB0B415AB840DA89 /* World1_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE7ADB8560BC7637BEB263 /* World1_3.swift */; };
 		43CD3E4DA6467E2A002F4B3A /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62F7FA2438F7F434C2B4D72 /* Physics.swift */; };
+		44EB8915F4EA8E6039899D76 /* tilemap.png in Resources */ = {isa = PBXBuildFile; fileRef = 012907B35A97A95D87E71FF1 /* tilemap.png */; };
 		4673030A785B531A9D82C808 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379775CDD963037DF0F83591 /* GameScene.swift */; };
 		4821DAB34CB1324D4B59E103 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9713B9D95C6B8D7337522901 /* Haptics.swift */; };
 		4AF7DEED90B8B175E7219462 /* JoystickOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BC55C6E961AEA1C1EDA8C3 /* JoystickOverlay.swift */; };
 		5BA3A09519F54A697B352C8D /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C01826EC43499229A9245 /* Enemy.swift */; };
 		5E732D714FE3C2554E9C391A /* LevelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86C70C3663D3E493920C3A /* LevelData.swift */; };
+		62891E1F0ED5D6024102ACAD /* Tiles.atlas in Resources */ = {isa = PBXBuildFile; fileRef = F3E23295EFF2E0DAE2423B05 /* Tiles.atlas */; };
 		67C612AFCA6202F726CC16AA /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A79F04E35CAB9A92AA98123 /* DeviceIdentity.swift */; };
 		71AF5EEE38E662270E09520B /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98F30EFBD85D47F611553EE /* HUDView.swift */; };
 		788C391AB99FA07CFA4E1AD6 /* LevelSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB872C7BF14FC140157E668 /* LevelSelectView.swift */; };
@@ -28,24 +32,38 @@
 		8B5455C0979382494102E815 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43EC9A309DB2B528F01414 /* SettingsView.swift */; };
 		8B99C203E81C85F18243C8AF /* HMACSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5B6FF3A85BED1AB9533A9 /* HMACSigner.swift */; };
 		95E2D885569246DE657D7D08 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF86FF30D59940BA5BE325D /* RootView.swift */; };
+		97B628B6E4F72C0D3C36AC09 /* Backgrounds.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1015C384B337C50D49833A25 /* Backgrounds.atlas */; };
 		9E3C7584DB7D82A000140711 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47519AFF97176D2036B9ECFB /* Camera.swift */; };
+		A5F65F3B5B094226AF602665 /* Kenney-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1C65B50CA82DCC1EE7D70B83 /* Kenney-License.txt */; };
 		AE9852883B9F9C2147DDB269 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118686DB3F564874F51CECA9 /* GameOverView.swift */; };
+		B0217DE4B50D4BF795C7D3BA /* SpriteRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097BC6DC732E44B490335D18 /* SpriteRegistry.swift */; };
+		B36956452657F5D33AC6EF9C /* tilemap-characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C9E3E0113F3E00290A90B9C /* tilemap-characters.png */; };
+		BA67E6FA854285F6B3985DF5 /* tilemap-backgrounds.png in Resources */ = {isa = PBXBuildFile; fileRef = 90A41B44BD74F75E0ADCC224 /* tilemap-backgrounds.png */; };
 		C6F9AC68351C4C0381CE4C61 /* GameContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E322B57E09F5F9224A64A45 /* GameContainerView.swift */; };
 		C784D048FA08D4F63B571348 /* World1_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3458567BF37FD455DBD5DCEB /* World1_1.swift */; };
+		CD4079AA07300914B970D47C /* Characters.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 738EEC68BBB70C98C2B00F07 /* Characters.atlas */; };
 		CF6422204DBCCC1A489288D3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375423B8CBF8364B5A441C17 /* Player.swift */; };
 		DBF9E3778F9F4D78B9775935 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B34FADA683190C5C343AD0 /* APIClient.swift */; };
 		E6C1E86D752B542209535A14 /* PixelHopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05596BF8BF56931B70DEE512 /* PixelHopApp.swift */; };
 		F74A160BFE344DA8CA9583EA /* NicknameOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C7C8788AD16D5A6F2930E3 /* NicknameOnboardingView.swift */; };
+		F893ECE45377B03F54344219 /* tilemap-characters_packed.png in Resources */ = {isa = PBXBuildFile; fileRef = 201E385EA771A4F85B00B082 /* tilemap-characters_packed.png */; };
 		FAF2D5EFC6A8DA1C71EEE28C /* ScoreSubmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5F2BF2D0FFD9B8F3E1C79 /* ScoreSubmitter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		012907B35A97A95D87E71FF1 /* tilemap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tilemap.png; sourceTree = "<group>"; };
 		05596BF8BF56931B70DEE512 /* PixelHopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelHopApp.swift; sourceTree = "<group>"; };
+		097BC6DC732E44B490335D18 /* SpriteRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteRegistry.swift; sourceTree = "<group>"; };
+		0C34274012459308A238AE07 /* tilemap-backgrounds_packed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tilemap-backgrounds_packed.png"; sourceTree = "<group>"; };
+		1015C384B337C50D49833A25 /* Backgrounds.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Backgrounds.atlas; sourceTree = "<group>"; };
 		118686DB3F564874F51CECA9 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
+		1C65B50CA82DCC1EE7D70B83 /* Kenney-License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Kenney-License.txt"; sourceTree = "<group>"; };
+		201E385EA771A4F85B00B082 /* tilemap-characters_packed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tilemap-characters_packed.png"; sourceTree = "<group>"; };
 		28BC55C6E961AEA1C1EDA8C3 /* JoystickOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickOverlay.swift; sourceTree = "<group>"; };
 		3458567BF37FD455DBD5DCEB /* World1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_1.swift; sourceTree = "<group>"; };
 		375423B8CBF8364B5A441C17 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		379775CDD963037DF0F83591 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		3C9E3E0113F3E00290A90B9C /* tilemap-characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tilemap-characters.png"; sourceTree = "<group>"; };
 		4748C29A402E5E9C978AB1B3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		47519AFF97176D2036B9ECFB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		4DE5B6FF3A85BED1AB9533A9 /* HMACSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACSigner.swift; sourceTree = "<group>"; };
@@ -55,10 +73,12 @@
 		5DF7AA820E2900B0B7EAD825 /* PixelHop Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PixelHop Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E322B57E09F5F9224A64A45 /* GameContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameContainerView.swift; sourceTree = "<group>"; };
 		62C7C8788AD16D5A6F2930E3 /* NicknameOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameOnboardingView.swift; sourceTree = "<group>"; };
+		738EEC68BBB70C98C2B00F07 /* Characters.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Characters.atlas; sourceTree = "<group>"; };
 		788E4EF3D405C988AF04E562 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A30573259BADE58A68A9AA3 /* GameSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSave.swift; sourceTree = "<group>"; };
 		7A79F04E35CAB9A92AA98123 /* DeviceIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceIdentity.swift; sourceTree = "<group>"; };
 		7D5C3B52994A9960E21E2107 /* World1_4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_4.swift; sourceTree = "<group>"; };
+		90A41B44BD74F75E0ADCC224 /* tilemap-backgrounds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tilemap-backgrounds.png"; sourceTree = "<group>"; };
 		9713B9D95C6B8D7337522901 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		A19724337B27E79CB0196371 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		A3F7F789FDA39C609A03386E /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
@@ -67,8 +87,10 @@
 		D2FE7ADB8560BC7637BEB263 /* World1_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_3.swift; sourceTree = "<group>"; };
 		D8382439ECF85546EA26EE46 /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		DEF86FF30D59940BA5BE325D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		DF3ECB9016FDADF83F97A138 /* tilemap_packed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tilemap_packed.png; sourceTree = "<group>"; };
 		E62F7FA2438F7F434C2B4D72 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
 		EE43EC9A309DB2B528F01414 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F3E23295EFF2E0DAE2423B05 /* Tiles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Tiles.atlas; sourceTree = "<group>"; };
 		F98F30EFBD85D47F611553EE /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
 		FBE5F2BF2D0FFD9B8F3E1C79 /* ScoreSubmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreSubmitter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +104,7 @@
 				379775CDD963037DF0F83591 /* GameScene.swift */,
 				E62F7FA2438F7F434C2B4D72 /* Physics.swift */,
 				375423B8CBF8364B5A441C17 /* Player.swift */,
+				097BC6DC732E44B490335D18 /* SpriteRegistry.swift */,
 				A9255A8EAE8F150D417FC27C /* Levels */,
 			);
 			path = Game;
@@ -98,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				788E4EF3D405C988AF04E562 /* Assets.xcassets */,
+				6D08716D247EAD2249C783FE /* Sprites */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -135,6 +159,23 @@
 				EE43EC9A309DB2B528F01414 /* SettingsView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		6D08716D247EAD2249C783FE /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				1015C384B337C50D49833A25 /* Backgrounds.atlas */,
+				738EEC68BBB70C98C2B00F07 /* Characters.atlas */,
+				1C65B50CA82DCC1EE7D70B83 /* Kenney-License.txt */,
+				DF3ECB9016FDADF83F97A138 /* tilemap_packed.png */,
+				0C34274012459308A238AE07 /* tilemap-backgrounds_packed.png */,
+				90A41B44BD74F75E0ADCC224 /* tilemap-backgrounds.png */,
+				201E385EA771A4F85B00B082 /* tilemap-characters_packed.png */,
+				3C9E3E0113F3E00290A90B9C /* tilemap-characters.png */,
+				012907B35A97A95D87E71FF1 /* tilemap.png */,
+				F3E23295EFF2E0DAE2423B05 /* Tiles.atlas */,
+			);
+			path = Sprites;
 			sourceTree = "<group>";
 		};
 		84189143CBD452E68EACC187 /* Input */ = {
@@ -268,6 +309,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				27BDD5267D5B8DC5EBBF94E5 /* Assets.xcassets in Resources */,
+				97B628B6E4F72C0D3C36AC09 /* Backgrounds.atlas in Resources */,
+				CD4079AA07300914B970D47C /* Characters.atlas in Resources */,
+				A5F65F3B5B094226AF602665 /* Kenney-License.txt in Resources */,
+				62891E1F0ED5D6024102ACAD /* Tiles.atlas in Resources */,
+				BA67E6FA854285F6B3985DF5 /* tilemap-backgrounds.png in Resources */,
+				2709608B0AF2B37C1C17BDB9 /* tilemap-backgrounds_packed.png in Resources */,
+				B36956452657F5D33AC6EF9C /* tilemap-characters.png in Resources */,
+				F893ECE45377B03F54344219 /* tilemap-characters_packed.png in Resources */,
+				44EB8915F4EA8E6039899D76 /* tilemap.png in Resources */,
+				22A11AD4B77950992619E8B3 /* tilemap_packed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +354,7 @@
 				FAF2D5EFC6A8DA1C71EEE28C /* ScoreSubmitter.swift in Sources */,
 				8B5455C0979382494102E815 /* SettingsView.swift in Sources */,
 				8B41A2D34B3C058EBEC7F27D /* Sound.swift in Sources */,
+				B0217DE4B50D4BF795C7D3BA /* SpriteRegistry.swift in Sources */,
 				C784D048FA08D4F63B571348 /* World1_1.swift in Sources */,
 				31B8CFEABE6314C0D03DB564 /* World1_2.swift in Sources */,
 				34EAD457CB0B415AB840DA89 /* World1_3.swift in Sources */,

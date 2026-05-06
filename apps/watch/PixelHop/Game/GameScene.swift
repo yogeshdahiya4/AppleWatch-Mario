@@ -125,11 +125,17 @@ final class GameScene: SKScene {
         let ts = Constants.tileSize
         let tilesNode = SKNode()
         worldNode.addChild(tilesNode)
+        let registry = SpriteRegistry.shared
         for x in 0..<level.width {
             for y in 0..<level.height {
                 let t = level.tile(at: TilePoint(x: x, y: y))
                 if t == .empty { continue }
-                let node = SKSpriteNode(color: tileColor(t, theme: level.theme), size: CGSize(width: ts, height: ts))
+                let node: SKSpriteNode
+                if let tex = registry.texture(for: t, theme: level.theme) {
+                    node = SKSpriteNode(texture: tex, size: CGSize(width: ts, height: ts))
+                } else {
+                    node = SKSpriteNode(color: tileColor(t, theme: level.theme), size: CGSize(width: ts, height: ts))
+                }
                 node.anchorPoint = CGPoint(x: 0, y: 0)
                 node.position = CGPoint(x: CGFloat(x) * ts, y: CGFloat(y) * ts)
                 tilesNode.addChild(node)
