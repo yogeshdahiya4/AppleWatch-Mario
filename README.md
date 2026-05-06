@@ -11,6 +11,15 @@ A Mario-style 2D platformer **for Apple Watch**, with an online global leaderboa
 ![Postgres](https://img.shields.io/badge/Postgres-16-blue)
 ![Coolify](https://img.shields.io/badge/Deployed%20on-Coolify-purple)
 
+## Status
+
+- ✅ **Backend** deployed and live at `https://applewatch-mario-api.72.62.0.34.sslip.io` (valid Let's Encrypt cert) — passes the full E2E test suite (`tools/test-api.sh`).
+- ✅ **Watch app** builds for watchOS 26.4 simulator (Apple Watch Series 11 46mm), launches, and renders the onboarding screen:
+
+  <p align="center"><img src="docs/screenshots/01-onboarding.png" width="220" alt="PixelHop onboarding screen"/></p>
+
+- ⏳ **Physical-watch sideload** is yours to do — open `apps/watch/PixelHop.xcodeproj`, sign with your free Apple ID under Signing & Capabilities, then run on a paired watch (`⌘R`).
+
 ## What's in the box
 
 - **`apps/watch/`** — the watchOS app (SwiftUI + SpriteKit). Standalone watch app — no companion iPhone app required.
@@ -64,6 +73,13 @@ git push origin main
 ./tools/coolify-deploy.sh   # ⚠ pushes do NOT auto-deploy on this VPS — always run this
 ```
 
+## Documentation
+
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — module map, per-frame data flow, HMAC protocol, why we don't use SKPhysicsBody
+- [`DEPLOY.md`](DEPLOY.md) — Coolify backend deployment + watch app sideload setup, including the *manual deploy after every push* gotcha
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — how to add a new level, full tile alphabet, headless typecheck workflow
+- [`services/api/SECURITY.md`](services/api/SECURITY.md) — HMAC threat model, replay protection, score caps
+
 ## License
 
-Code: MIT. Art assets: CC0 (Kenney). PixelHop is original IP — not affiliated with Nintendo or any other rights holder.
+Code: MIT. Art assets: CC0 (Kenney Pixel Platformer pack v1.2 — see `apps/watch/PixelHop/Resources/Sprites/Kenney-License.txt`). PixelHop is original IP — not affiliated with Nintendo or any other rights holder.
