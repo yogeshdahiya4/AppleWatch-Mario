@@ -10,10 +10,10 @@ import Foundation
 /// One tile = `Constants.tileSize` pixels.
 enum Constants {
     /// Side of one square tile, in points (rendered).
-    static let tileSize: CGFloat = 16
+    static let tileSize: CGFloat = 24
 
-    /// Player AABB size in pixels.
-    static let playerSize = CGSize(width: 12, height: 14)
+    /// Player AABB size in points.
+    static let playerSize = CGSize(width: 18, height: 22)
 
     /// Gravity per frame at 60fps (px / frame²).
     static let gravity: CGFloat = 0.55

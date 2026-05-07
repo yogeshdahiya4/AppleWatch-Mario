@@ -40,23 +40,24 @@ final class Player {
             size: Constants.playerSize
         )
         self.node = SKNode()
-        self.sprite = SKSpriteNode(color: SKColor(red: 0.95, green: 0.20, blue: 0.20, alpha: 1), size: Constants.playerSize)
+        // Always start with a bright, distinctive coloured base so the player is
+        // unmistakable on a small watch screen. If a character texture loads on
+        // top, we tint it down so the texture shows through cleanly.
+        self.sprite = SKSpriteNode(color: SKColor(red: 1.0, green: 0.30, blue: 0.30, alpha: 1), size: Constants.playerSize)
+        if let tex = SpriteRegistry.shared.playerTexture(state: "idle") {
+            sprite.texture = tex
+            sprite.colorBlendFactor = 0   // let texture's own colours show
+        }
         node.addChild(sprite)
         node.position = CGPoint(x: spawn.x + Constants.playerSize.width / 2,
                                  y: spawn.y + Constants.playerSize.height / 2)
-        if let atlas {
-            applyAtlas(atlas)
-        }
-    }
-
-    private func applyAtlas(_ atlas: SKTextureAtlas) {
-        // Try to grab idle/run/jump frames from the atlas; fall back to flat color.
-        if let idle = atlas.textureNames.first(where: { $0.contains("idle") }) {
-            sprite.texture = atlas.textureNamed(idle)
-            sprite.size = Constants.playerSize
-            sprite.color = .clear
-            sprite.colorBlendFactor = 0
-        }
+        // Soft white halo behind the sprite so it pops against any backdrop.
+        let halo = SKShapeNode(circleOfRadius: max(Constants.playerSize.width, Constants.playerSize.height) * 0.7)
+        halo.fillColor = .white
+        halo.strokeColor = .clear
+        halo.alpha = 0.18
+        halo.zPosition = -1
+        node.addChild(halo)
     }
 
     // MARK: - Per-frame update

@@ -34,10 +34,25 @@ final class GameSession: ObservableObject {
     }
 
     func bootstrap() async {
-        if deviceIdentity == nil {
-            // First launch — defer registration until user picks a nickname.
-            return
+        #if DEBUG
+        // Sim/QA shortcut: auto-register a throwaway device when this env var
+        // is set (typically via `xcrun simctl launch ... --env PIXELHOP_DEBUG_AUTO_ONBOARD=1`).
+        // Lets us boot straight into the menu + drive the game without typing
+        // a nickname on a watch keyboard simctl can't reach.
+        if deviceIdentity == nil,
+           ProcessInfo.processInfo.environment["PIXELHOP_DEBUG_AUTO_ONBOARD"] == "1" {
+            do {
+                let nick = "demo\(Int.random(in: 1000...9999))"
+                let id = try await DeviceIdentity.registerNew(nickname: nick, api: api)
+                try? id.persistToKeychain()
+                deviceIdentity = id
+            } catch {
+                // Fall through; manual onboarding still works.
+            }
         }
-        await scoreSubmitter.flushPending(identity: deviceIdentity!)
+        #endif
+        if let id = deviceIdentity {
+            await scoreSubmitter.flushPending(identity: id)
+        }
     }
 }

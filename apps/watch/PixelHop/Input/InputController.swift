@@ -104,6 +104,19 @@ final class InputController: ObservableObject {
         jumpHeld = false
     }
 
+    // MARK: - Explicit jump button (in addition to flick-up gesture)
+
+    /// Called when the on-screen jump button is pressed.
+    func jumpButtonDown() {
+        jumpEvents.send(1.0)   // full magnitude
+        jumpHeld = true
+    }
+
+    /// Called when the jump button is released (variable-height window closes).
+    func jumpButtonUp() {
+        jumpHeld = false
+    }
+
     private func detectFlickIfReady() {
         guard !jumpTriggeredThisTouch, let d = drag else { return }
         guard d.verticalSamples.count >= flickWindow else { return }

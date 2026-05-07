@@ -32,8 +32,12 @@ struct GameContainerView: View {
                         .gesture(dragGesture(viewSize: geo.size))
                 }
 
-                // Joystick overlay
-                JoystickOverlay(input: input)
+                // Joystick overlay (circular) + jump button
+                JoystickOverlay(
+                    input: input,
+                    onJumpDown: { input.jumpButtonDown() },
+                    onJumpUp:   { input.jumpButtonUp() }
+                )
                     .frame(width: geo.size.width, height: geo.size.height)
 
                 // HUD
@@ -57,9 +61,40 @@ struct GameContainerView: View {
         .onChange(of: crownValue) { oldValue, newValue in
             input.crownDidRotate(by: CGFloat(newValue - oldValue))
         }
-        .onAppear { rebuildScene() }
+        .onAppear {
+            rebuildScene()
+            #if DEBUG
+            if ProcessInfo.processInfo.environment["PIXELHOP_DEBUG_AUTOPLAY_INPUT"] == "1" {
+                startAutoInputLoop()
+            }
+            #endif
+        }
         .onChange(of: currentLevel) { _, _ in rebuildScene() }
     }
+
+    #if DEBUG
+    /// Drives the input controller in a loop: walk right, jump, repeat.
+    /// Used for screen-recording demo videos.
+    @MainActor
+    private func startAutoInputLoop() {
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(800))
+            // Stay touching down on the joystick area, drag right
+            let now = { Date().timeIntervalSinceReferenceDate }
+            input.touchDown(at: CGPoint(x: 40, y: 40), time: now())
+            for _ in 0..<300 {
+                try? await Task.sleep(for: .milliseconds(50))
+                input.touchMoved(to: CGPoint(x: 90, y: 40), time: now())
+                if Int.random(in: 0..<10) == 0 {
+                    input.jumpButtonDown()
+                    try? await Task.sleep(for: .milliseconds(180))
+                    input.jumpButtonUp()
+                }
+            }
+            input.touchUp(at: CGPoint(x: 90, y: 40), time: now())
+        }
+    }
+    #endif
 
     private func dragGesture(viewSize: CGSize) -> some Gesture {
         DragGesture(minimumDistance: 0)

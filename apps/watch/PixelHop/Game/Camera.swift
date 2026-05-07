@@ -32,9 +32,12 @@ final class GameCamera {
         let dy = target.y - node.position.y
         node.position.y += dy * verticalLerp
 
-        // Clamp to level bounds (camera position is *center*)
-        let halfW = viewportSize.width / 2
-        let halfH = viewportSize.height / 2
+        // Clamp to level bounds (camera position is *center*).
+        // SKCameraNode.xScale shrinks/grows the visible area, so account for it.
+        let visibleW = viewportSize.width * node.xScale
+        let visibleH = viewportSize.height * node.yScale
+        let halfW = visibleW / 2
+        let halfH = visibleH / 2
         if levelBounds.size != .zero, levelBounds.width != .infinity {
             node.position.x = node.position.x.clamped(
                 levelBounds.minX + halfW,

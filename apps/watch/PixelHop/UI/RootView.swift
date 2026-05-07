@@ -34,6 +34,24 @@ struct RootView: View {
         }
         .task {
             await session.bootstrap()
+            #if DEBUG
+            // QA shortcut: jump straight to a route after auto-onboard.
+            // Set via `SIMCTL_CHILD_PIXELHOP_DEBUG_ROUTE=...` (also needs AUTO_ONBOARD).
+            // Accepted values: "1-1" / "1-2" / "1-3" / "1-4" → play; "levels", "leaderboard", "settings".
+            if let route = ProcessInfo.processInfo.environment["PIXELHOP_DEBUG_ROUTE"],
+               session.deviceIdentity != nil {
+                try? await Task.sleep(for: .milliseconds(300))
+                if let id = LevelID(rawValue: route) {
+                    path.append(AppRoute.play(id))
+                } else if route == "levels" {
+                    path.append(AppRoute.levelSelect)
+                } else if route == "leaderboard" {
+                    path.append(AppRoute.leaderboard(.global))
+                } else if route == "settings" {
+                    path.append(AppRoute.settings)
+                }
+            }
+            #endif
         }
     }
 }
