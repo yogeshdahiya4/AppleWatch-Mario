@@ -27,11 +27,23 @@ final class Goomba: Enemy {
     let stompable: Bool = true
 
     init(at origin: CGPoint) {
-        box = AABB(origin: origin, size: CGSize(width: 12, height: 12))
+        box = AABB(origin: origin, size: CGSize(width: 18, height: 18))
         node = SKNode()
-        sprite = SKSpriteNode(color: SKColor(red: 0.55, green: 0.30, blue: 0.10, alpha: 1), size: box.size)
+        let renderSize = CGSize(width: 22, height: 22)
+        let frames = SpriteRegistry.shared.enemyFrames(kind: .goomba)
+        if let first = frames.first {
+            sprite = SKSpriteNode(texture: first, size: renderSize)
+            // Walk-cycle bobble.
+            if frames.count > 1 {
+                let walk = SKAction.animate(with: frames, timePerFrame: 0.18, resize: false, restore: true)
+                sprite.run(.repeatForever(walk))
+            }
+        } else {
+            sprite = SKSpriteNode(color: SKColor(red: 0.95, green: 0.78, blue: 0.20, alpha: 1), size: renderSize)
+        }
         node.addChild(sprite)
-        node.position = CGPoint(x: origin.x + 6, y: origin.y + 6)
+        node.position = CGPoint(x: origin.x + box.size.width / 2,
+                                  y: origin.y + box.size.height / 2)
     }
 
     func tick(level: Level) {
@@ -87,15 +99,27 @@ final class KoopaTroopa: Enemy {
 
     init(at origin: CGPoint, variant: Variant) {
         self.variant = variant
-        self.box = AABB(origin: origin, size: CGSize(width: 12, height: 16))
+        self.box = AABB(origin: origin, size: CGSize(width: 18, height: 22))
         self.velX = (variant == .green) ? -0.5 : -0.7
         self.node = SKNode()
-        let color: SKColor = variant == .green
-            ? SKColor(red: 0.20, green: 0.78, blue: 0.30, alpha: 1)
-            : SKColor(red: 0.95, green: 0.20, blue: 0.20, alpha: 1)
-        self.sprite = SKSpriteNode(color: color, size: box.size)
+        let renderSize = CGSize(width: 22, height: 26)
+        let kind: EntitySpawn.Kind = variant == .green ? .koopaGreen : .koopaRed
+        let frames = SpriteRegistry.shared.enemyFrames(kind: kind)
+        if let first = frames.first {
+            self.sprite = SKSpriteNode(texture: first, size: renderSize)
+            if frames.count > 1 {
+                let walk = SKAction.animate(with: frames, timePerFrame: 0.18, resize: false, restore: true)
+                sprite.run(.repeatForever(walk))
+            }
+        } else {
+            let color: SKColor = variant == .green
+                ? SKColor(red: 0.20, green: 0.78, blue: 0.30, alpha: 1)
+                : SKColor(red: 0.95, green: 0.20, blue: 0.20, alpha: 1)
+            self.sprite = SKSpriteNode(color: color, size: renderSize)
+        }
         node.addChild(sprite)
-        node.position = CGPoint(x: origin.x + 6, y: origin.y + 8)
+        node.position = CGPoint(x: origin.x + box.size.width / 2,
+                                  y: origin.y + box.size.height / 2)
     }
 
     func tick(level: Level) {

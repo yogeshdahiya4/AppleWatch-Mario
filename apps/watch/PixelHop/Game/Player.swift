@@ -12,7 +12,7 @@ final class Player {
     }
 
     enum Animation: String {
-        case idle, run, jump, hurt, dead
+        case idle, run, jump, fall, hurt, dead
     }
 
     // MARK: - State
@@ -40,14 +40,17 @@ final class Player {
             size: Constants.playerSize
         )
         self.node = SKNode()
-        // Always start with a bright, distinctive coloured base so the player is
-        // unmistakable on a small watch screen. If a character texture loads on
-        // top, we tint it down so the texture shows through cleanly.
-        self.sprite = SKSpriteNode(color: SKColor(red: 1.0, green: 0.30, blue: 0.30, alpha: 1), size: Constants.playerSize)
-        if let tex = SpriteRegistry.shared.playerTexture(state: "idle") {
-            sprite.texture = tex
-            sprite.colorBlendFactor = 0   // let texture's own colours show
+        let registry = SpriteRegistry.shared
+        // Render a slightly oversized sprite so the 24-pt character pops out of
+        // the 18×22 collision box.
+        let renderSize = CGSize(width: Constants.playerSize.width * 1.4,
+                                  height: Constants.playerSize.height * 1.4)
+        if let tex = registry.playerTexture(state: "idle") {
+            self.sprite = SKSpriteNode(texture: tex, size: renderSize)
+        } else {
+            self.sprite = SKSpriteNode(color: SKColor(red: 1.0, green: 0.30, blue: 0.30, alpha: 1), size: renderSize)
         }
+        sprite.zPosition = 1
         node.addChild(sprite)
         node.position = CGPoint(x: spawn.x + Constants.playerSize.width / 2,
                                  y: spawn.y + Constants.playerSize.height / 2)
@@ -58,6 +61,43 @@ final class Player {
         halo.alpha = 0.18
         halo.zPosition = -1
         node.addChild(halo)
+        // Kick off the idle animation cycle.
+        playAnimation(.idle)
+    }
+
+    // MARK: - Animation cycles
+
+    private func framesAction(_ state: Animation) -> SKAction {
+        let frames = SpriteRegistry.shared.playerFrames(state: state.rawValue)
+        guard frames.count > 1 else {
+            // Single frame — just set the texture, no animation.
+            return SKAction.run { [weak self] in
+                if let f = frames.first { self?.sprite.texture = f }
+            }
+        }
+        let timePerFrame: TimeInterval = (state == .run) ? 0.10 : 0.18
+        let anim = SKAction.animate(with: frames, timePerFrame: timePerFrame, resize: false, restore: true)
+        return .repeatForever(anim)
+    }
+
+    private func playAnimation(_ state: Animation) {
+        sprite.removeAction(forKey: "anim")
+        sprite.run(framesAction(state), withKey: "anim")
+    }
+
+    // Squash on takeoff, stretch on landing — gives jumps a sense of weight.
+    func playJumpSquash() {
+        sprite.removeAction(forKey: "squash")
+        let down = SKAction.scale(to: CGSize(width: sprite.size.width * 1.10, height: sprite.size.height * 0.85), duration: 0.05)
+        let up = SKAction.scale(to: sprite.size, duration: 0.10)
+        sprite.run(.sequence([down, up]), withKey: "squash")
+    }
+
+    func playLandSquash() {
+        sprite.removeAction(forKey: "squash")
+        let down = SKAction.scale(to: CGSize(width: sprite.size.width * 1.15, height: sprite.size.height * 0.78), duration: 0.06)
+        let up = SKAction.scale(to: sprite.size, duration: 0.10)
+        sprite.run(.sequence([down, up]), withKey: "squash")
     }
 
     // MARK: - Per-frame update
@@ -185,12 +225,22 @@ final class Player {
     private func updateAnimation(onGround: Bool, moving: Bool) {
         let next: Animation
         if !alive { next = .dead }
-        else if !onGround { next = .jump }
+        else if !onGround {
+            next = velocity.dy > 0 ? .jump : .fall
+        }
         else if moving { next = .run }
         else { next = .idle }
         if next != currentAnim {
+            // Land impact: was airborne, now on ground.
+            if onGround, currentAnim == .fall || currentAnim == .jump {
+                playLandSquash()
+            }
+            // Takeoff: was on ground, now ascending.
+            if !onGround, next == .jump, currentAnim != .jump, currentAnim != .fall {
+                playJumpSquash()
+            }
             currentAnim = next
-            // Animation playback driven by sprite atlas in Phase 5; placeholder no-op.
+            playAnimation(next)
         }
     }
 }
