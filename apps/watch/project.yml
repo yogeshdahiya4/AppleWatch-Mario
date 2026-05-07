@@ -39,5 +39,5 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: NO
         SUPPORTS_MACCATALYST: NO
         SUPPORTED_PLATFORMS: "watchsimulator watchos"
-        MARKETING_VERSION: "1.0.0"
+        MARKETING_VERSION: "1.1.0"
         CURRENT_PROJECT_VERSION: "1"
