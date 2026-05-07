@@ -35,7 +35,7 @@ enum World1_2 {
             id: .world1_2,
             tiles: parsed.tiles,
             height: parsed.height,
-            spawn: TilePoint(x: 2, y: 2),
+            spawn: TilePoint(x: 0, y: 3),
             goal: TilePoint(x: parsed.tiles.count - 12, y: 4),
             entities: entities,
             theme: .underground,

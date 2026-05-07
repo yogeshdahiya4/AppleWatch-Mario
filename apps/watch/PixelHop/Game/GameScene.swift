@@ -34,6 +34,7 @@ final class GameScene: SKScene {
     private let worldNode = SKNode()
     private let entitiesNode = SKNode()
     private let coinsNode = SKNode()
+    private var background: Background!
 
     // MARK: - Counters
     private var scoreTotal = 0
@@ -77,6 +78,10 @@ final class GameScene: SKScene {
         )
         camera_.node.position = player.node.position
         addChild(camera_.node)
+
+        // Atmospheric backdrop attaches to the camera so it follows automatically.
+        background = Background(theme: level.theme, viewportSize: size)
+        camera_.node.addChild(background.node)
 
         wireInput()
         hudState = HUDState(
@@ -297,8 +302,9 @@ final class GameScene: SKScene {
             finishLevel(succeeded: false)
         }
 
-        // Camera
+        // Camera + parallax background
         camera_.follow(center, viewportSize: size)
+        background.update(cameraPosition: camera_.node.position, dt: CGFloat(dt))
 
         // Publish HUD
         hudState = HUDState(

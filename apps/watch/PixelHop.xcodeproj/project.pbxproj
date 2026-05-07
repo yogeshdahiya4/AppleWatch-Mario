@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		007EAF89D343D7D9EC8156B4 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C4D77FE5CEE0E7D0F7CF0C /* Background.swift */; };
 		0466710686F3FA7F2A16475C /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F7F789FDA39C609A03386E /* InputController.swift */; };
 		16FFD1E09BDD54EF68BD9B27 /* World1_4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C3B52994A9960E21E2107 /* World1_4.swift */; };
 		22A11AD4B77950992619E8B3 /* tilemap_packed.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3ECB9016FDADF83F97A138 /* tilemap_packed.png */; };
@@ -90,6 +91,7 @@
 		DF3ECB9016FDADF83F97A138 /* tilemap_packed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tilemap_packed.png; sourceTree = "<group>"; };
 		E62F7FA2438F7F434C2B4D72 /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
 		EE43EC9A309DB2B528F01414 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F1C4D77FE5CEE0E7D0F7CF0C /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		F3E23295EFF2E0DAE2423B05 /* Tiles.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Tiles.atlas; sourceTree = "<group>"; };
 		F98F30EFBD85D47F611553EE /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
 		FBE5F2BF2D0FFD9B8F3E1C79 /* ScoreSubmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreSubmitter.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		2588C04480D248A6C705FAC7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				F1C4D77FE5CEE0E7D0F7CF0C /* Background.swift */,
 				47519AFF97176D2036B9ECFB /* Camera.swift */,
 				4F8C01826EC43499229A9245 /* Enemy.swift */,
 				379775CDD963037DF0F83591 /* GameScene.swift */,
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBF9E3778F9F4D78B9775935 /* APIClient.swift in Sources */,
+				007EAF89D343D7D9EC8156B4 /* Background.swift in Sources */,
 				9E3C7584DB7D82A000140711 /* Camera.swift in Sources */,
 				67C612AFCA6202F726CC16AA /* DeviceIdentity.swift in Sources */,
 				5BA3A09519F54A697B352C8D /* Enemy.swift in Sources */,
