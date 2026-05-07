@@ -32,12 +32,8 @@ struct GameContainerView: View {
                         .gesture(dragGesture(viewSize: geo.size))
                 }
 
-                // Joystick overlay (circular) + jump button
-                JoystickOverlay(
-                    input: input,
-                    onJumpDown: { input.jumpButtonDown() },
-                    onJumpUp:   { input.jumpButtonUp() }
-                )
+                // Joystick overlay (bottom-right). Jumps come from flicking up.
+                JoystickOverlay(input: input)
                     .frame(width: geo.size.width, height: geo.size.height)
 
                 // HUD

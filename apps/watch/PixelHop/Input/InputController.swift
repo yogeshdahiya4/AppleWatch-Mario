@@ -44,12 +44,17 @@ final class InputController: ObservableObject {
         var origin: CGPoint
         var current: CGPoint
         var startedAt: TimeInterval
-        var verticalSamples: [CGFloat] = []   // dy per sample
+        var verticalSamples: [CGFloat] = []   // dy per sample (positive = up)
     }
 
     private var drag: DragState?
-    /// Has the current touch already triggered a jump? (prevents repeat-fire.)
-    private var jumpTriggeredThisTouch: Bool = false
+    /// Wall-clock timestamp of the last jump fire. Multiple flicks per touch
+    /// session are allowed, but they're throttled to one jump per
+    /// `jumpRefractorySeconds`.
+    private var lastJumpFiredAt: TimeInterval = 0
+    /// Min seconds between two flick-jumps from the same touch. Matches the
+    /// typical max-input cadence for repeated jumps in a platformer (~5/sec).
+    var jumpRefractorySeconds: TimeInterval = 0.20
 
     enum JoystickState: Equatable {
         case idle
@@ -61,7 +66,6 @@ final class InputController: ObservableObject {
     /// Called by the scene/view on touchDown.
     func touchDown(at p: CGPoint, time: TimeInterval) {
         drag = DragState(origin: p, current: p, startedAt: time)
-        jumpTriggeredThisTouch = false
         joystick = .active(origin: p, thumb: p)
         recomputeAxes()
     }
@@ -81,13 +85,16 @@ final class InputController: ObservableObject {
         recomputeAxes()
     }
 
-    /// Called on touchUp. If the lift itself was a strong upward swipe, also fire jump.
+    /// Called on touchUp. If the lift itself was a strong upward swipe, also fire jump
+    /// (subject to the refractory window so we don't double-fire when the in-drag
+    /// detector already triggered).
     func touchUp(at p: CGPoint, time _: TimeInterval) {
         if let d = drag {
             let totalDy = p.y - d.origin.y
-            // If finger flew up significantly without an in-drag flick already firing
-            if !jumpTriggeredThisTouch, totalDy > flickMinDisplacement {
+            let now = Date().timeIntervalSinceReferenceDate
+            if totalDy > flickMinDisplacement, now - lastJumpFiredAt > jumpRefractorySeconds {
                 let mag = min(1.0, abs(totalDy) / 60)
+                lastJumpFiredAt = now
                 jumpEvents.send(mag)
             }
         }
@@ -118,21 +125,23 @@ final class InputController: ObservableObject {
     }
 
     private func detectFlickIfReady() {
-        guard !jumpTriggeredThisTouch, let d = drag else { return }
+        guard var d = drag else { return }
         guard d.verticalSamples.count >= flickWindow else { return }
-        // Positive sum = finger is moving UP in screen coords.
-        // SpriteKit uses bottom-origin Y (up = positive), but watchOS UIKit
-        // touches have top-origin Y. The view layer flips this before passing
-        // to us so up = positive here.
+        // Refractory window: don't fire repeatedly within one short flick.
+        let now = Date().timeIntervalSinceReferenceDate
+        if now - lastJumpFiredAt < jumpRefractorySeconds { return }
+        // Positive sum = finger is moving UP in screen coords (the view layer
+        // flips top-origin SwiftUI gestures to bottom-origin before they reach us).
         let upwardSum = d.verticalSamples.reduce(0, +)
         let upwardAvg = upwardSum / CGFloat(d.verticalSamples.count)
-        let displacement = d.current.y - d.origin.y
-        if upwardAvg >= flickThreshold, displacement >= flickMinDisplacement {
-            jumpTriggeredThisTouch = true
+        if upwardAvg >= flickThreshold, upwardSum >= flickMinDisplacement {
+            lastJumpFiredAt = now
             let magnitude = min(1.0, max(0.4, upwardAvg / 12))
             jumpEvents.send(magnitude)
             jumpHeld = true
-            // jumpHeld auto-clears on touch up; that's the variable-height window.
+            // Clear the buffer so the next flick starts measuring fresh.
+            d.verticalSamples.removeAll()
+            drag = d
         }
     }
 
