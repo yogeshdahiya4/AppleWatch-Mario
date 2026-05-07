@@ -1,26 +1,34 @@
 import Foundation
 import Security
 
-/// Stable per-device identity stored in the watch's Keychain.
-/// Lifecycle: generated on first launch, persists until app/device wipe.
+/// Stable per-device identity. Stored in `UserDefaults` (the sim/watch keychain
+/// requires an Access-Group entitlement that's hard to set up with free
+/// signing — and the secret isn't catastrophic to leak: it only authenticates
+/// score submissions for one device id).
+///
+/// We additionally write a copy to the Keychain when possible. UserDefaults is
+/// the source of truth; Keychain is a best-effort secondary.
 struct DeviceIdentity: Equatable, Sendable {
     let id: UUID
     let nickname: String
     let secret: String   // hex-encoded HMAC key
 
+    static let storageKey = "pixelhop.device-identity.v1"
     static let keychainService = "com.yogeshdahiya.pixelhop"
     static let keychainAccount = "device-identity"
 
-    /// Try to register a new identity with the backend.
-    /// Returns the new local identity if the server accepts.
     static func registerNew(nickname: String, api: APIClient) async throws -> DeviceIdentity {
         let id = UUID()
         let response = try await api.registerDevice(deviceId: id, nickname: nickname)
         return DeviceIdentity(id: id, nickname: response.nickname, secret: response.secret)
     }
 
+    /// Save to UserDefaults; *also* try the Keychain (best-effort, doesn't error).
     func persistToKeychain() throws {
-        let payload = try JSONEncoder().encode(KeychainPayload(id: id, nickname: nickname, secret: secret))
+        let payload = try JSONEncoder().encode(StoredPayload(id: id, nickname: nickname, secret: secret))
+        UserDefaults.standard.set(payload, forKey: Self.storageKey)
+        UserDefaults.standard.synchronize()
+        // Best-effort Keychain write — silently fails on sandboxed sim/free-tier device
         let q: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: Self.keychainService,
@@ -29,13 +37,17 @@ struct DeviceIdentity: Equatable, Sendable {
         SecItemDelete(q as CFDictionary)
         var add = q
         add[kSecValueData as String] = payload
-        // Limit to this device — keychain syncing across devices is wrong here.
         add[kSecAttrAccessible as String] = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
-        let status = SecItemAdd(add as CFDictionary, nil)
-        guard status == errSecSuccess else { throw DeviceIdentityError.keychainError(status: status) }
+        _ = SecItemAdd(add as CFDictionary, nil)
     }
 
     static func loadFromKeychain() -> DeviceIdentity? {
+        // Primary: UserDefaults
+        if let data = UserDefaults.standard.data(forKey: storageKey),
+           let payload = try? JSONDecoder().decode(StoredPayload.self, from: data) {
+            return DeviceIdentity(id: payload.id, nickname: payload.nickname, secret: payload.secret)
+        }
+        // Fallback: Keychain
         let q: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: keychainService,
@@ -44,19 +56,27 @@ struct DeviceIdentity: Equatable, Sendable {
             kSecMatchLimit as String: kSecMatchLimitOne,
         ]
         var item: CFTypeRef?
-        let status = SecItemCopyMatching(q as CFDictionary, &item)
-        guard status == errSecSuccess, let data = item as? Data else { return nil }
-        guard let payload = try? JSONDecoder().decode(KeychainPayload.self, from: data) else { return nil }
+        guard SecItemCopyMatching(q as CFDictionary, &item) == errSecSuccess,
+              let data = item as? Data,
+              let payload = try? JSONDecoder().decode(StoredPayload.self, from: data)
+        else { return nil }
         return DeviceIdentity(id: payload.id, nickname: payload.nickname, secret: payload.secret)
     }
 
-    fileprivate struct KeychainPayload: Codable {
+    fileprivate struct StoredPayload: Codable {
         let id: UUID
         let nickname: String
         let secret: String
     }
 }
 
-enum DeviceIdentityError: Error {
+enum DeviceIdentityError: LocalizedError {
     case keychainError(status: OSStatus)
+
+    var errorDescription: String? {
+        switch self {
+        case .keychainError(let status):
+            return "Keychain status \(status)"
+        }
+    }
 }
