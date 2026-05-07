@@ -47,6 +47,7 @@ struct MainMenuView: View {
                         endPoint: .bottomTrailing
                     )
                 )
+                .shadow(color: .orange.opacity(0.4), radius: 8, x: 0, y: 0)
             if let nick = session.deviceIdentity?.nickname {
                 Text("@\(nick)")
                     .font(.caption2)
@@ -75,11 +76,18 @@ struct BigButton: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(tint.opacity(0.22))
+                .fill(
+                    LinearGradient(
+                        colors: [tint.opacity(0.30), tint.opacity(0.18)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
                 .overlay(
                     RoundedRectangle(cornerRadius: 14, style: .continuous)
-                        .stroke(tint.opacity(0.55), lineWidth: 1)
+                        .stroke(tint.opacity(0.65), lineWidth: 1)
                 )
+                .shadow(color: tint.opacity(0.18), radius: 4, x: 0, y: 1)
         )
         .foregroundStyle(tint)
     }

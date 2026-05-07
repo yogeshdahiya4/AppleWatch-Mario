@@ -48,6 +48,9 @@ final class GameScene: SKScene {
     // MARK: - Subscriptions
     private var subs = Set<AnyCancellable>()
 
+    // MARK: - Audio
+    private let sound = Sound()
+
     init(level: Level, input: InputController, viewportSize: CGSize) {
         self.level = level
         self.input = input
@@ -212,7 +215,11 @@ final class GameScene: SKScene {
 
     private func wireInput() {
         input.jumpEvents
-            .sink { [weak self] _ in self?.pendingJumpFlick = true }
+            .sink { [weak self] _ in
+                self?.pendingJumpFlick = true
+                Haptics.jump()
+                self?.sound.play(.jump)
+            }
             .store(in: &subs)
         input.pauseEvents
             .sink { [weak self] in self?.togglePause() }
@@ -259,13 +266,16 @@ final class GameScene: SKScene {
                     e.stomped()
                     scoreTotal += 100
                     Haptics.stomp()
+                    sound.play(.stomp)
                     player.velocity.dy = 3.5    // small upward bounce off the enemy (y-up)
                     let p = player.node.position
                     worldNode.addChild(Effects.dustPuff(at: CGPoint(x: p.x, y: p.y - 8)))
                 } else {
                     player.takeDamage(fatal: false)
                     Haptics.hurt()
+                    sound.play(.hurt)
                     worldNode.addChild(Effects.hurtSparks(at: player.node.position))
+                    camera_.shake(magnitude: 8, duration: 0.25)
                 }
             }
         }
@@ -281,9 +291,11 @@ final class GameScene: SKScene {
                     coinCount += 1
                     scoreTotal += 200
                     Haptics.coin()
+                    sound.play(.coin)
                     worldNode.addChild(Effects.coinSparkle(at: pos))
                 } else {
                     Haptics.powerUp()
+                    sound.play(.powerUp)
                     if kind.contains("mushroom"), player.mode == .small { player.mode = .big }
                     if kind.contains("fireFlower") { player.mode = .fire }
                     if kind.contains("oneUp") { livesLeft += 1 }
@@ -315,7 +327,7 @@ final class GameScene: SKScene {
         }
 
         // Camera + parallax background
-        camera_.follow(center, viewportSize: size)
+        camera_.follow(center, viewportSize: size, playerDy: player.velocity.dy)
         background.update(cameraPosition: camera_.node.position, dt: CGFloat(dt))
 
         // Publish HUD
@@ -344,6 +356,7 @@ final class GameScene: SKScene {
         )
         if succeeded {
             Haptics.levelClear()
+            sound.play(.levelClear)
             // Confetti rains down from the top of the visible viewport.
             let camPos = camera_.node.position
             let confetti = Effects.confetti(

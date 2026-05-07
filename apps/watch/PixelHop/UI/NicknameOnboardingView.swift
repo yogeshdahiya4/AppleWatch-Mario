@@ -22,6 +22,7 @@ struct NicknameOnboardingView: View {
                             endPoint: .trailing
                         )
                     )
+                    .shadow(color: .orange.opacity(0.45), radius: 6, x: 0, y: 0)
 
                 Text("Pick a name for the leaderboard. 2-16 chars. letters, digits, _ - .")
                     .font(.caption2)
