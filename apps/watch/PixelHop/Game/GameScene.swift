@@ -247,7 +247,7 @@ final class GameScene: SKScene {
                     e.stomped()
                     scoreTotal += 100
                     Haptics.stomp()
-                    player.velocity.dy = -3.5    // small bounce
+                    player.velocity.dy = 3.5    // small upward bounce off the enemy (y-up)
                 } else {
                     player.takeDamage(fatal: false)
                     Haptics.hurt()

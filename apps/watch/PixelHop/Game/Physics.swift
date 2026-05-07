@@ -15,17 +15,18 @@ enum Constants {
     /// Player AABB size in points.
     static let playerSize = CGSize(width: 18, height: 22)
 
-    /// Gravity per frame at 60fps (px / frame²).
+    /// Gravity magnitude per frame at 60fps (px / frame²). Subtracted from
+    /// velocity.dy each frame — y-up coords mean "down" is negative dy.
     static let gravity: CGFloat = 0.55
 
-    /// Cap on downward velocity so we never tunnel through tiles.
+    /// Cap on downward speed (positive magnitude). |velocity.dy| ≤ this when falling.
     static let maxFallSpeed: CGFloat = 9.5
 
-    /// Initial upward jump impulse (px / frame).
-    static let jumpImpulse: CGFloat = -8.6
+    /// Initial jump impulse — positive = up in y-up SpriteKit coords.
+    static let jumpImpulse: CGFloat = 8.6
 
-    /// Extra upward force while jump is "held" (variable height).
-    static let jumpHoldBoost: CGFloat = -0.35
+    /// Extra upward force while jump is "held" (variable height). Positive = up.
+    static let jumpHoldBoost: CGFloat = 0.35
 
     /// Max number of frames the jump-hold boost is applied.
     static let maxJumpHoldFrames: Int = 12

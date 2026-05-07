@@ -69,7 +69,8 @@ final class Player {
     func tick(moveAxis: CGFloat, jumpHeld: Bool, jumpFlicked: Bool, level: Level) -> CGPoint {
         guard alive else {
             // Death animation: fall off screen, no input.
-            velocity.dy = max(velocity.dy + Constants.gravity, -Constants.maxFallSpeed)
+            // y-up: "down" = subtract gravity from dy; clamp downward speed.
+            velocity.dy = max(velocity.dy - Constants.gravity, -Constants.maxFallSpeed)
             box.origin.y += velocity.dy
             updateNodePosition()
             return centerWorld
@@ -110,27 +111,32 @@ final class Player {
             bufferedJumpFramesLeft = 0
         }
 
-        // Variable jump height while held
-        if inAir, jumpHeld, velocity.dy < 0, jumpHoldFramesUsed < Constants.maxJumpHoldFrames {
+        // Variable jump height while held — extend upward motion only while ascending.
+        if inAir, jumpHeld, velocity.dy > 0, jumpHoldFramesUsed < Constants.maxJumpHoldFrames {
             velocity.dy += Constants.jumpHoldBoost
             jumpHoldFramesUsed += 1
         }
 
-        // Gravity
-        velocity.dy = (velocity.dy + Constants.gravity).clamped(-99, Constants.maxFallSpeed)
+        // Gravity — y-up: subtract per frame, clamp downward speed (negative).
+        velocity.dy = (velocity.dy - Constants.gravity).clamped(-Constants.maxFallSpeed, 99)
 
         // Resolve X
         let xRes = sweepX(box: box, dx: velocity.dx, level: level)
         box.origin.x += xRes.resolvedDelta
         if xRes.hitWall { velocity.dx = 0 }
 
-        // Resolve Y
+        // Resolve Y. velocity.dy > 0 = moving up; < 0 = falling.
         let yRes = sweepY(box: box, dy: velocity.dy, level: level)
         box.origin.y += yRes.resolvedDelta
         if yRes.hitWall {
-            // ceiling or floor — clear vertical velocity
-            if velocity.dy > 0 { velocity.dy = 0; jumpHoldFramesUsed = Constants.maxJumpHoldFrames }
-            else { velocity.dy = 0 }
+            if velocity.dy > 0 {
+                // ceiling — kill remaining upward motion + close hold window
+                velocity.dy = 0
+                jumpHoldFramesUsed = Constants.maxJumpHoldFrames
+            } else {
+                // floor — kill downward velocity
+                velocity.dy = 0
+            }
         }
 
         // Hazard check (lava, spikes)
@@ -149,7 +155,8 @@ final class Player {
         if invincibleFramesLeft > 0 { return }
         if fatal || mode == .small {
             alive = false
-            velocity.dy = -10
+            // small upward bounce on death (y-up: positive = up), then gravity takes over.
+            velocity.dy = 6
             currentAnim = .dead
         } else {
             mode = .small
