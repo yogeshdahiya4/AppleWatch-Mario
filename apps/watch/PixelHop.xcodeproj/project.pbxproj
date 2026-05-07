@@ -33,6 +33,7 @@
 		8B5455C0979382494102E815 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE43EC9A309DB2B528F01414 /* SettingsView.swift */; };
 		8B99C203E81C85F18243C8AF /* HMACSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE5B6FF3A85BED1AB9533A9 /* HMACSigner.swift */; };
 		95E2D885569246DE657D7D08 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF86FF30D59940BA5BE325D /* RootView.swift */; };
+		971B3317AE301DFC528D92B2 /* Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397901ACF566A7B495AB5CEE /* Effects.swift */; };
 		97B628B6E4F72C0D3C36AC09 /* Backgrounds.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 1015C384B337C50D49833A25 /* Backgrounds.atlas */; };
 		9E3C7584DB7D82A000140711 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47519AFF97176D2036B9ECFB /* Camera.swift */; };
 		A5F65F3B5B094226AF602665 /* Kenney-License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1C65B50CA82DCC1EE7D70B83 /* Kenney-License.txt */; };
@@ -64,6 +65,7 @@
 		3458567BF37FD455DBD5DCEB /* World1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World1_1.swift; sourceTree = "<group>"; };
 		375423B8CBF8364B5A441C17 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		379775CDD963037DF0F83591 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		397901ACF566A7B495AB5CEE /* Effects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effects.swift; sourceTree = "<group>"; };
 		3C9E3E0113F3E00290A90B9C /* tilemap-characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tilemap-characters.png"; sourceTree = "<group>"; };
 		4748C29A402E5E9C978AB1B3 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		47519AFF97176D2036B9ECFB /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				F1C4D77FE5CEE0E7D0F7CF0C /* Background.swift */,
 				47519AFF97176D2036B9ECFB /* Camera.swift */,
+				397901ACF566A7B495AB5CEE /* Effects.swift */,
 				4F8C01826EC43499229A9245 /* Enemy.swift */,
 				379775CDD963037DF0F83591 /* GameScene.swift */,
 				E62F7FA2438F7F434C2B4D72 /* Physics.swift */,
@@ -336,6 +339,7 @@
 				007EAF89D343D7D9EC8156B4 /* Background.swift in Sources */,
 				9E3C7584DB7D82A000140711 /* Camera.swift in Sources */,
 				67C612AFCA6202F726CC16AA /* DeviceIdentity.swift in Sources */,
+				971B3317AE301DFC528D92B2 /* Effects.swift in Sources */,
 				5BA3A09519F54A697B352C8D /* Enemy.swift in Sources */,
 				C6F9AC68351C4C0381CE4C61 /* GameContainerView.swift in Sources */,
 				AE9852883B9F9C2147DDB269 /* GameOverView.swift in Sources */,

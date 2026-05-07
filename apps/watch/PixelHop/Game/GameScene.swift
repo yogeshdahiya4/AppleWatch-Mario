@@ -83,6 +83,13 @@ final class GameScene: SKScene {
         background = Background(theme: level.theme, viewportSize: size)
         camera_.node.addChild(background.node)
 
+        // Per-theme ambient particles.
+        if level.theme == .castle {
+            let bottomY = CGFloat(0) * Constants.tileSize
+            let levelW = CGFloat(level.width) * Constants.tileSize
+            worldNode.addChild(Effects.lavaEmber(in: CGRect(x: 0, y: bottomY, width: levelW, height: 8)))
+        }
+
         wireInput()
         hudState = HUDState(
             score: 0, coins: 0, lives: livesLeft,
@@ -253,9 +260,12 @@ final class GameScene: SKScene {
                     scoreTotal += 100
                     Haptics.stomp()
                     player.velocity.dy = 3.5    // small upward bounce off the enemy (y-up)
+                    let p = player.node.position
+                    worldNode.addChild(Effects.dustPuff(at: CGPoint(x: p.x, y: p.y - 8)))
                 } else {
                     player.takeDamage(fatal: false)
                     Haptics.hurt()
+                    worldNode.addChild(Effects.hurtSparks(at: player.node.position))
                 }
             }
         }
@@ -271,12 +281,14 @@ final class GameScene: SKScene {
                     coinCount += 1
                     scoreTotal += 200
                     Haptics.coin()
+                    worldNode.addChild(Effects.coinSparkle(at: pos))
                 } else {
                     Haptics.powerUp()
                     if kind.contains("mushroom"), player.mode == .small { player.mode = .big }
                     if kind.contains("fireFlower") { player.mode = .fire }
                     if kind.contains("oneUp") { livesLeft += 1 }
                     scoreTotal += 1000
+                    worldNode.addChild(Effects.coinSparkle(at: pos))
                 }
                 coin.removeFromParent()
                 coins.remove(at: i)
@@ -328,10 +340,17 @@ final class GameScene: SKScene {
             coins: coinCount,
             timeMs: elapsedMs,
             died: !succeeded,
-            worldCompleted: false   // aggregator handles cross-level
+            worldCompleted: false
         )
         if succeeded {
             Haptics.levelClear()
+            // Confetti rains down from the top of the visible viewport.
+            let camPos = camera_.node.position
+            let confetti = Effects.confetti(
+                at: CGPoint(x: camPos.x, y: camPos.y + size.height / 2),
+                width: size.width
+            )
+            addChild(confetti)
         }
         levelEnded.send(result)
     }
