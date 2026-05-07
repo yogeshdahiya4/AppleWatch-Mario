@@ -31,12 +31,10 @@ final class InputController: ObservableObject {
 
     var deadzonePoints: CGFloat = 6
     var maxDragPoints: CGFloat = 60
-    /// Minimum upward velocity (points per frame) to count as a jump flick.
-    var flickThreshold: CGFloat = 5.0
-    /// Minimum total upward displacement during the flick to count.
-    var flickMinDisplacement: CGFloat = 12
-    /// Window of frames over which to average vertical velocity.
-    var flickWindow: Int = 4
+    /// How far above the joystick origin (in points) before we treat the touch
+    /// as "jump pressed". Tuned to work alongside horizontal drag so diagonal
+    /// motion (up-right / up-left) is reliable.
+    var jumpDragThreshold: CGFloat = 22
 
     // MARK: - Internal
 
@@ -44,16 +42,16 @@ final class InputController: ObservableObject {
         var origin: CGPoint
         var current: CGPoint
         var startedAt: TimeInterval
-        var verticalSamples: [CGFloat] = []   // dy per sample (positive = up)
     }
 
     private var drag: DragState?
-    /// Wall-clock timestamp of the last jump fire. Multiple flicks per touch
-    /// session are allowed, but they're throttled to one jump per
-    /// `jumpRefractorySeconds`.
+    /// Wall-clock timestamp of the last jump emission. While the user keeps
+    /// the joystick pushed up the controller fires `jumpEvents` repeatedly,
+    /// throttled to one fire per `jumpRefractorySeconds`. Player.tick filters
+    /// these against the grounded/coyote-time state so airborne re-triggers
+    /// don't actually jump twice.
     private var lastJumpFiredAt: TimeInterval = 0
-    /// Min seconds between two flick-jumps from the same touch. Matches the
-    /// typical max-input cadence for repeated jumps in a platformer (~5/sec).
+    /// Min seconds between two repeat-fires while holding up. ~5/sec.
     var jumpRefractorySeconds: TimeInterval = 0.20
 
     enum JoystickState: Equatable {
@@ -73,31 +71,14 @@ final class InputController: ObservableObject {
     /// Called every time the finger moves.
     func touchMoved(to p: CGPoint, time _: TimeInterval) {
         guard var d = drag else { return }
-        let dy = p.y - d.current.y
-        d.verticalSamples.append(dy)
-        if d.verticalSamples.count > flickWindow {
-            d.verticalSamples.removeFirst()
-        }
         d.current = p
         drag = d
         joystick = .active(origin: d.origin, thumb: p)
-        detectFlickIfReady()
         recomputeAxes()
+        evaluateJumpIntent()
     }
 
-    /// Called on touchUp. If the lift itself was a strong upward swipe, also fire jump
-    /// (subject to the refractory window so we don't double-fire when the in-drag
-    /// detector already triggered).
-    func touchUp(at p: CGPoint, time _: TimeInterval) {
-        if let d = drag {
-            let totalDy = p.y - d.origin.y
-            let now = Date().timeIntervalSinceReferenceDate
-            if totalDy > flickMinDisplacement, now - lastJumpFiredAt > jumpRefractorySeconds {
-                let mag = min(1.0, abs(totalDy) / 60)
-                lastJumpFiredAt = now
-                jumpEvents.send(mag)
-            }
-        }
+    func touchUp(at _: CGPoint, time _: TimeInterval) {
         drag = nil
         joystick = .idle
         moveAxis = 0
@@ -124,29 +105,28 @@ final class InputController: ObservableObject {
         jumpHeld = false
     }
 
-    private func detectFlickIfReady() {
-        guard var d = drag else { return }
-        guard d.verticalSamples.count >= flickWindow else { return }
-        // Refractory window: don't fire repeatedly within one short flick.
+    /// Virtual-joystick semantics: dragging the finger above the touch origin
+    /// expresses jump intent. While held in the upper region, jumps fire at
+    /// the refractory cadence (Player.tick gates them on grounded/coyote).
+    private func evaluateJumpIntent() {
+        guard let d = drag else { jumpHeld = false; return }
+        // y-up after view-layer flip: positive = finger above origin
+        let dy = d.current.y - d.origin.y
+        let pushedUp = dy > jumpDragThreshold
+        jumpHeld = pushedUp     // for variable-height jump while held
+        guard pushedUp else { return }
         let now = Date().timeIntervalSinceReferenceDate
-        if now - lastJumpFiredAt < jumpRefractorySeconds { return }
-        // Positive sum = finger is moving UP in screen coords (the view layer
-        // flips top-origin SwiftUI gestures to bottom-origin before they reach us).
-        let upwardSum = d.verticalSamples.reduce(0, +)
-        let upwardAvg = upwardSum / CGFloat(d.verticalSamples.count)
-        if upwardAvg >= flickThreshold, upwardSum >= flickMinDisplacement {
-            lastJumpFiredAt = now
-            let magnitude = min(1.0, max(0.4, upwardAvg / 12))
-            jumpEvents.send(magnitude)
-            jumpHeld = true
-            // Clear the buffer so the next flick starts measuring fresh.
-            d.verticalSamples.removeAll()
-            drag = d
-        }
+        guard now - lastJumpFiredAt >= jumpRefractorySeconds else { return }
+        lastJumpFiredAt = now
+        // Magnitude scales with how far up the finger is, capped sensibly.
+        let mag = min(1.0, max(0.5, dy / 60))
+        jumpEvents.send(mag)
     }
 
     private func recomputeAxes() {
         guard let d = drag else { moveAxis = 0; return }
+        // Horizontal axis is independent of vertical (jump). Diagonal drags
+        // (up-and-right, up-and-left) drive both at full strength.
         let dx = d.current.x - d.origin.x
         let signedMag = max(-maxDragPoints, min(maxDragPoints, dx))
         let absMag = abs(signedMag)
